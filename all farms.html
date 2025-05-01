@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Ahmed Khaled</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .welcome {
+      font-size: 20px;
+      margin-bottom: 15px;
+      direction: rtl;
+      font-weight: bold;
+      color: #ffdd99;
+      animation: slideDown 1s ease;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      animation: slideDown 1.2s ease;
+    }
+
+    select {
+      width: calc(100% - 20px);
+      padding: 12px 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    select option {
+      color: #000000; /* لون النص داخل القائمة المنسدلة */
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 12px 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-size: 15px;
+      outline: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    input[type="text"]:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.02);
+    }
+
+    ::placeholder {
+      color: #dddddd;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      border: none;
+      padding: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.4s, transform 0.3s;
+      animation: slideUp 1.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #feb47b, #ff7e5f);
+      transform: scale(1.03);
+    }
+
+    .signature {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #dddddd;
+      animation: fadeIn 2s ease;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="welcome">مرحباً, د.أحمد خالد</div>
+    <h1>Enter Signed Request</h1>
+
+    <!-- مربع اختيار المزرعة فوق مربع إدخال الريكويست -->
+    <select id="farmType">
+      <option value="us">🌾 فاميلي فارم</option>
+      <option value="th">🌸 هابي فارم</option>
+      <option value="fr">🌟 سوبر فارم</option>
+    </select>
+
+    <input type="text" id="signedRequest" placeholder="Paste your signed request here">
+    <button onclick="redirectToUrl()">Open Farm</button>
+    
+    <div class="signature">
+      Designed by Dr. Ahmed Khaled
+    </div>
+  </div>
+
+  <script>
+    function redirectToUrl() {
+      const signedRequest = document.getElementById('signedRequest').value.trim();
+      const farmType = document.getElementById('farmType').value;
+      if (signedRequest === "") {
+        alert("Please enter the signed request.");
+        return;
+      }
+      
+      let farmUrl = "https://farm-us.centurygames.com/ar/?signed_request=" + signedRequest; // فاميلي فارم - AR
+      if (farmType === "th") {
+        farmUrl = "https://farm-th.centurygames.com/en/?signed_request=" + signedRequest; // هابي فارم - EN
+      } else if (farmType === "fr") {
+        farmUrl = "https://farm-fr.centurygames.com/en/?signed_request=" + signedRequest; // سوبر فارم - EN
+      }
+
+      window.location.href = farmUrl;
+    }
+  </script>
+
+</body>
+</html>
